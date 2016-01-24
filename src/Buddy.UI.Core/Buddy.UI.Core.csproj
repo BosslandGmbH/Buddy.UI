@@ -57,8 +57,10 @@
     <Compile Include="Interfaces\IStylable.cs" />
     <Compile Include="Interfaces\ITheme.cs" />
     <Compile Include="Interfaces\IViewModel.cs" />
+    <Compile Include="Maybe.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="Requires.cs" />
     <Compile Include="Themes\AccentColor.cs" />
     <Compile Include="Themes\Theme.cs" />
     <Compile Include="Themes\ThemeManager.cs" />

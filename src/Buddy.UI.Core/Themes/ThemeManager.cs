@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using Buddy.UI.Core.Interfaces;
 
@@ -17,12 +19,29 @@ namespace Buddy.UI.Core.Themes
 		/// <summary>
 		///     Gets the available accent colors.
 		/// </summary>
-		public static ObservableCollection<IAccentColor> Accents { get; } = new ObservableCollection<IAccentColor>();
+		private static ObservableCollection<IAccentColor> Accents { get; } = new ObservableCollection<IAccentColor>();
 
 		/// <summary>
 		///     Gets the available themes.
 		/// </summary>
-		public static ObservableCollection<ITheme> Themes { get; } = new ObservableCollection<ITheme>();
+		private static ObservableCollection<ITheme> Themes { get; } = new ObservableCollection<ITheme>();
+
+	    public static Maybe<IAccentColor> TryGetAccent(string name)
+	    {Requires.NotNullOrEmpty(name, nameof(name));
+
+	        var ret = Accents.FirstOrDefault(v => v.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+	        return ret == null ? new Maybe<IAccentColor>() : new Maybe<IAccentColor>(ret);
+	    }
+
+	    public static Maybe<ITheme> TryGetTheme(string name)
+	    {
+	        Requires.NotNull(name, nameof(name));
+
+	        var ret = Themes.FirstOrDefault(v => v.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+	        return ret == null ? new Maybe<ITheme>() : new Maybe<ITheme>(ret);
+	    }
 
 		private static void InitializeThemes()
 		{

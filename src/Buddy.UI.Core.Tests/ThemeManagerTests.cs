@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Buddy.UI.Core.Interfaces;
 using Buddy.UI.Core.Themes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -19,13 +20,17 @@ namespace Buddy.UI.Core.Tests
 		[TestMethod]
 		public void ThemeManager_Default_ContainsThemes()
 		{
-			Assert.IsTrue(ThemeManager.Themes.Count > 0);
+		    var b = ThemeManager.TryGetTheme("BaseDark");
+
+			Assert.IsTrue(b.HasValue && b.Value != null);
 		}
 
 		[TestMethod]
 		public void ThemeManager_Default_ContainsAccents()
 		{
-			Assert.IsTrue(ThemeManager.Accents.Count > 0);
+		    var b = ThemeManager.TryGetAccent("Blue");
+
+			Assert.IsTrue(b.HasValue && b.Value != null);
 		}
 	}
 }

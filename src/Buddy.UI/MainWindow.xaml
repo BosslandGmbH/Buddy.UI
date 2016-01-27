@@ -12,5 +12,10 @@
                       SizeToContent="Manual"
                       Style="{DynamicResource CleanWindowStyleKey}"
                       mc:Ignorable="d">
-    <Grid />
+    <Grid>
+        <controls:MetroTabControl>
+            <controls:MetroTabItem Header="Controls" />
+            <controls:MetroTabItem Header="Settings" />
+        </controls:MetroTabControl>
+    </Grid>
 </controls:MetroWindow>

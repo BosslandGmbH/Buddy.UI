@@ -10,15 +10,11 @@ namespace Buddy.UI.Core.Themes
 {
 	public static class ThemeManager
 	{
-		private static readonly Dictionary<string, ResourceDictionary> _loadedDictionaries =
+		private static readonly Dictionary<string, ResourceDictionary> _loadedResourceDictionaries =
 			new Dictionary<string, ResourceDictionary>();
 
-		static ThemeManager()
-		{
-			LoadThemes();
-			LoadAccents();
-		}
-
+		private static bool _isInitialized;
+		
 		/// <summary>
 		///     Gets the available accent colors.
 		/// </summary>
@@ -69,18 +65,35 @@ namespace Buddy.UI.Core.Themes
 
 			Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
 
-			if (_loadedDictionaries.ContainsKey(key))
+			if (_loadedResourceDictionaries.ContainsKey(key))
 			{
 				// Remove the old stuff.
-				Application.Current.Resources.MergedDictionaries.Remove(_loadedDictionaries[key]);
-				_loadedDictionaries.Remove(key);
+				Application.Current.Resources.MergedDictionaries.Remove(_loadedResourceDictionaries[key]);
+				_loadedResourceDictionaries.Remove(key);
 			}
 
 			// And add the current.
-			_loadedDictionaries.Add(key, resourceDictionary);
+			_loadedResourceDictionaries.Add(key, resourceDictionary);
 		}
 
-		private static void LoadThemes()
+		/// <summary>
+		/// Initializes the Theme Manager, reloading themes and accents, and applying custom styling.
+		/// </summary>
+		public static void Initialize()
+		{
+			ReloadThemes();
+			ReloadAccents();
+
+			if (!_isInitialized)
+			{
+				LoadResources("CleanWindowStyle", new ResourceDictionary { Source = new Uri("pack://application:,,,/Buddy.UI.Core;component/Resources/Styles/CleanWindowStyle.xaml") });
+				LoadResources("MetroWindowStyle", new ResourceDictionary { Source = new Uri("pack://application:,,,/Buddy.UI.Core;component/Resources/Styles/MetroWindowStyle.xaml") });
+			}
+
+			_isInitialized = true;
+		}
+
+		private static void ReloadThemes()
 		{
 			string[] themes =
 			{
@@ -92,15 +105,15 @@ namespace Buddy.UI.Core.Themes
 
 			foreach (var t in themes)
 			{
-				var dic = new ResourceDictionary {Source = new Uri(t)};
+				var dic = new ResourceDictionary { Source = new Uri(t) };
 
-				var theme = new Theme {Name = Path.GetFileNameWithoutExtension(t), ResourceDictionary = dic};
+				var theme = new Theme { Name = Path.GetFileNameWithoutExtension(t), ResourceDictionary = dic };
 
 				Themes.Add(theme);
 			}
 		}
 
-		private static void LoadAccents()
+		private static void ReloadAccents()
 		{
 			string[] accents =
 			{
@@ -133,7 +146,7 @@ namespace Buddy.UI.Core.Themes
 
 			foreach (var a in accents)
 			{
-				var dic = new ResourceDictionary {Source = new Uri(a)};
+				var dic = new ResourceDictionary { Source = new Uri(a) };
 
 				var accent = new AccentColor(dic, Path.GetFileNameWithoutExtension(a));
 

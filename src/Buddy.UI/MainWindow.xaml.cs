@@ -10,7 +10,6 @@ namespace Buddy.UI
 		public MainWindow()
 		{
 			InitializeComponent();
-
 			DataContext = MainWindowViewModel.Instance;
 		}
 	}

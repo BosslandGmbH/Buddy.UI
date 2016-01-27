@@ -37,4 +37,9 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
+        <Setter Property="FontWeight">
+            <Setter.Value>Normal</Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

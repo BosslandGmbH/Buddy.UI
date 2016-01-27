@@ -4,8 +4,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Buddy.UI.Controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Buddy.UI.ViewModels"
+             DataContext="{x:Static vm:SettingsViewModel.Instance}"
              d:DesignHeight="300"
-             d:DesignWidth="300"
+             d:DesignWidth="500"
              mc:Ignorable="d">
-    <Grid />
+    <UserControl.Resources>
+        <Style x:Key="TextBlockHeader" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="{DynamicResource AccentColorBrush}" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ListBox Background="Transparent">
+            <ListBoxItem>Appearance</ListBoxItem>
+        </ListBox>
+
+        <TabControl Grid.Column="1">
+            <TabItem Header="Appearance">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0">Theme</Label>
+                    <ComboBox Grid.Row="0"
+                              Grid.Column="1"
+                              ItemsSource="{Binding Themes}"
+                              SelectedIndex="{Binding SelectedThemeIndex}" />
+
+                    <Label Grid.Row="1" Grid.Column="0">Accent</Label>
+                    <ComboBox Grid.Row="1"
+                              Grid.Column="1"
+                              ItemsSource="{Binding Accents}"
+                              SelectedIndex="{Binding SelectedAccentIndex}" />
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
 </UserControl>

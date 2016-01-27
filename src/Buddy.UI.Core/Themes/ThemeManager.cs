@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -9,10 +10,13 @@ namespace Buddy.UI.Core.Themes
 {
 	public static class ThemeManager
 	{
+		private static readonly Dictionary<string, ResourceDictionary> _loadedDictionaries =
+			new Dictionary<string, ResourceDictionary>();
+
 		static ThemeManager()
 		{
-			InitializeThemes();
-			InitializeAccents();
+			LoadThemes();
+			LoadAccents();
 		}
 
 		/// <summary>
@@ -25,6 +29,11 @@ namespace Buddy.UI.Core.Themes
 		/// </summary>
 		public static ObservableCollection<ITheme> Themes { get; } = new ObservableCollection<ITheme>();
 
+		/// <summary>
+		///     Gets an accent color with the specified name, if it exists.
+		/// </summary>
+		/// <param name="name">The name.</param>
+		/// <returns></returns>
 		public static Maybe<IAccentColor> TryGetAccent(string name)
 		{
 			Requires.NotNullOrEmpty(name, nameof(name));
@@ -34,6 +43,11 @@ namespace Buddy.UI.Core.Themes
 			return ret == null ? new Maybe<IAccentColor>() : new Maybe<IAccentColor>(ret);
 		}
 
+		/// <summary>
+		///     Gets a theme with the specified name, if it exists.
+		/// </summary>
+		/// <param name="name">The name.</param>
+		/// <returns></returns>
 		public static Maybe<ITheme> TryGetTheme(string name)
 		{
 			Requires.NotNull(name, nameof(name));
@@ -43,7 +57,30 @@ namespace Buddy.UI.Core.Themes
 			return ret == null ? new Maybe<ITheme>() : new Maybe<ITheme>(ret);
 		}
 
-		private static void InitializeThemes()
+		/// <summary>
+		///     Loads the specified resource dictionary using the specified key into the application's current merged dictionaries.
+		/// </summary>
+		/// <param name="key">The key.</param>
+		/// <param name="resourceDictionary">The resource dictionary.</param>
+		public static void LoadResources(string key, ResourceDictionary resourceDictionary)
+		{
+			Requires.NotNullOrEmpty(key, nameof(key));
+			Requires.NotNull(resourceDictionary, nameof(resourceDictionary));
+
+			Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+
+			if (_loadedDictionaries.ContainsKey(key))
+			{
+				// Remove the old stuff.
+				Application.Current.Resources.MergedDictionaries.Remove(_loadedDictionaries[key]);
+				_loadedDictionaries.Remove(key);
+			}
+
+			// And add the current.
+			_loadedDictionaries.Add(key, resourceDictionary);
+		}
+
+		private static void LoadThemes()
 		{
 			string[] themes =
 			{
@@ -63,7 +100,7 @@ namespace Buddy.UI.Core.Themes
 			}
 		}
 
-		private static void InitializeAccents()
+		private static void LoadAccents()
 		{
 			string[] accents =
 			{

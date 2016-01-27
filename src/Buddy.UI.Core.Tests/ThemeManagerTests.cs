@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Buddy.UI.Core.Interfaces;
 using Buddy.UI.Core.Themes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

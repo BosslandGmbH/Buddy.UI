@@ -40,8 +40,10 @@
       <HintPath>..\packages\MahApps.Metro.1.3.0-ALPHA016\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.3.0-ALPHA016\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -62,11 +64,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AccentColorTests.cs" />
     <Compile Include="MaybeTests.cs" />
     <Compile Include="RelayCommandTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequiresTests.cs" />
     <Compile Include="ThemeManagerTests.cs" />
+    <Compile Include="ThemeTests.cs" />
+    <Compile Include="ViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Buddy.UI.Core\Buddy.UI.Core.csproj">

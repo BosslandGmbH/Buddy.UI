@@ -17,7 +17,10 @@ namespace Buddy.UI.Core.Themes
 
 		public void Apply()
 		{
-			throw new NotImplementedException();
+            if (ResourceDictionary == null)
+                throw new InvalidOperationException("Can not set a theme without a valid ResourceDictionary!");
+
+		    ThemeManager.LoadResources(Name, ResourceDictionary);
 		}
 
 		public string Name { get; internal set; }

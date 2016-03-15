@@ -33,7 +33,7 @@ namespace Buddy.UI.ViewModels
 				SetProperty(ref _selectedThemeIndex, value);
 
 				var t = ThemeManager.Themes[value];
-				ThemeManager.LoadResources(t.Name, t.ResourceDictionary);
+			    t.Apply();
 			}
 		}
 
@@ -50,7 +50,7 @@ namespace Buddy.UI.ViewModels
 				SetProperty(ref _selectedAccentIndex, value);
 
 				var a = ThemeManager.Accents[value];
-				ThemeManager.LoadResources(a.Name, a.ResourceDictionary);
+			    a.Apply();
 			}
 		}
 	}

@@ -28,7 +28,10 @@ namespace Buddy.UI.Core.Themes
 
 		public void Apply()
 		{
-			throw new NotImplementedException();
+			if (ResourceDictionary == null)
+                throw new InvalidOperationException("Can not apply an accent color without a valid ResourceDictionary!");
+
+		    ThemeManager.LoadResources(Name, ResourceDictionary);
 		}
 
 		/// <summary>

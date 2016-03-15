@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using Buddy.UI.Core.Interfaces;
@@ -9,6 +10,7 @@ namespace Buddy.UI.Core.Themes
 	///     Provides a base implementation for a theme.
 	/// </summary>
 	[DebuggerDisplay("Theme: {Name}")]
+	[DisplayName("{Name}")]
 	public class Theme : ITheme
 	{
 		public ResourceDictionary ResourceDictionary { get; internal set; }

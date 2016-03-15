@@ -44,12 +44,14 @@
                     <ComboBox Grid.Row="0"
                               Grid.Column="1"
                               ItemsSource="{Binding Themes}"
-                              SelectedIndex="{Binding SelectedThemeIndex}" />
+                              SelectedIndex="{Binding SelectedThemeIndex}"
+                              DisplayMemberPath="Name"/>
 
                     <Label Grid.Row="1" Grid.Column="0">Accent</Label>
                     <ComboBox Grid.Row="1"
                               Grid.Column="1"
                               ItemsSource="{Binding Accents}"
+                              DisplayMemberPath="Name"
                               SelectedIndex="{Binding SelectedAccentIndex}" />
 
                 </Grid>

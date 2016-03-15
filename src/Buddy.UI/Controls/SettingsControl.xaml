@@ -26,35 +26,42 @@
         </Grid.ColumnDefinitions>
         <ListBox Background="Transparent">
             <ListBoxItem>Appearance</ListBoxItem>
+            <ListBoxItem>Others</ListBoxItem>
         </ListBox>
 
         <TabControl Grid.Column="1">
-            <TabItem Header="Appearance">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+            <TabItem>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Style="{StaticResource TextBlockHeader}" Text="THEME"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0">Theme</Label>
-                    <ComboBox Grid.Row="0"
+                        <Label Grid.Row="0" Grid.Column="0">Theme</Label>
+                        <ComboBox Grid.Row="0"
                               Grid.Column="1"
+                              Width="Auto"
                               ItemsSource="{Binding Themes}"
                               SelectedIndex="{Binding SelectedThemeIndex}"
                               DisplayMemberPath="Name"/>
 
-                    <Label Grid.Row="1" Grid.Column="0">Accent</Label>
-                    <ComboBox Grid.Row="1"
+                        <Label Grid.Row="2" Grid.Column="0">Accent</Label>
+                        <ComboBox Grid.Row="2"
                               Grid.Column="1"
+                              Width="Auto"
                               ItemsSource="{Binding Accents}"
                               DisplayMemberPath="Name"
                               SelectedIndex="{Binding SelectedAccentIndex}" />
 
-                </Grid>
+                    </Grid>
+                </StackPanel>
             </TabItem>
         </TabControl>
     </Grid>

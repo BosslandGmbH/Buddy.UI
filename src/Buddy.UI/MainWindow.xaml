@@ -18,6 +18,9 @@
             <TabItem Header="Settings">
                 <localControls:SettingsControl />
             </TabItem>
+            <TabItem Header="Status">
+                <localControls:StatusControl/>
+            </TabItem>
         </TabControl>
     </Grid>
 </controls:MetroWindow>
